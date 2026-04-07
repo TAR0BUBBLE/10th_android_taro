@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="230dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginEnd="12dp"
     android:orientation="vertical">
@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/iv_home_product"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="314dp"
         android:background="#EFEFEF"
         android:padding="12dp"
         android:scaleType="fitCenter"
@@ -22,7 +22,7 @@
         android:layout_marginTop="14dp"
         android:text="Air Jordan XXXVI"
         android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/tv_home_product_price"
@@ -31,6 +31,6 @@
         android:layout_marginTop="12dp"
         android:text="US$185"
         android:textColor="#7B7B7B"
-        android:textSize="16sp" />
+        android:textSize="17sp" />
 
 </LinearLayout>

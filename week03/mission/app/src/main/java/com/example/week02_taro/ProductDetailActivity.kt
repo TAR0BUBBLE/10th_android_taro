@@ -17,16 +17,22 @@ class ProductDetailActivity : AppCompatActivity() {
         val title = intent.getStringExtra("title").orEmpty()
         val subtitle = intent.getStringExtra("subtitle").orEmpty()
         val price = intent.getStringExtra("price").orEmpty()
+        val description = intent.getStringExtra("description").orEmpty()
+        val shownColor = intent.getStringExtra("shownColor").orEmpty()
+        val styleCode = intent.getStringExtra("styleCode").orEmpty()
 
         if (imageResId != 0) {
             binding.ivDetailProduct.setImageResource(imageResId)
         }
 
+        binding.tvDetailCategory.text = subtitle
         binding.tvDetailTitle.text = title
-        binding.tvDetailSubtitle.text = subtitle
         binding.tvDetailPrice.text = price
+        binding.tvDetailDescription.text = description
+        binding.tvDetailShown.text = "• Shown: $shownColor"
+        binding.tvDetailStyle.text = "• Style: $styleCode"
 
-        binding.tvBack.setOnClickListener {
+        binding.ivBack.setOnClickListener {
             finish()
         }
     }
