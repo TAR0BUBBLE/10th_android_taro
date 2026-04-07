@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.week03_taro.databinding.ItemShopProductBinding
 
 class ShopProductAdapter(
-    private val productList: MutableList<Product>,
-    private val onItemClick: (Product) -> Unit
+    private val onItemClick: (Product) -> Unit,
+    private val onHeartClick: (Product) -> Unit
 ) : RecyclerView.Adapter<ShopProductAdapter.ShopProductViewHolder>() {
+
+    private val productList = mutableListOf<Product>()
 
     inner class ShopProductViewHolder(
         private val binding: ItemShopProductBinding
@@ -30,18 +32,17 @@ class ShopProductAdapter(
             binding.tvShopBadge.isVisible = product.badge.isNotBlank()
             binding.tvShopBadge.text = product.badge
 
-            binding.tvShopHeart.text = if (product.isFavorite) "♥" else "♡"
+            binding.ivShopHeart.setImageResource(
+                if (product.isFavorite) R.drawable.ic_heart_on
+                else R.drawable.ic_heart_off
+            )
 
             binding.root.setOnClickListener {
                 onItemClick(product)
             }
 
-            binding.tvShopHeart.setOnClickListener {
-                product.isFavorite = !product.isFavorite
-                val position = bindingAdapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    notifyItemChanged(position)
-                }
+            binding.ivShopHeart.setOnClickListener {
+                onHeartClick(product)
             }
         }
     }
@@ -60,4 +61,10 @@ class ShopProductAdapter(
     }
 
     override fun getItemCount(): Int = productList.size
+
+    fun submitList(newList: List<Product>) {
+        productList.clear()
+        productList.addAll(newList)
+        notifyDataSetChanged()
+    }
 }
