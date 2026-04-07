@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.week03_taro.databinding.ItemHomeProductBinding
 
 class HomeProductAdapter(
-    private val productList: List<Product>,
     private val onItemClick: (Product) -> Unit
 ) : RecyclerView.Adapter<HomeProductAdapter.HomeProductViewHolder>() {
+
+    private val productList = mutableListOf<Product>()
 
     inner class HomeProductViewHolder(
         private val binding: ItemHomeProductBinding
@@ -39,4 +40,10 @@ class HomeProductAdapter(
     }
 
     override fun getItemCount(): Int = productList.size
+
+    fun submitList(newList: List<Product>) {
+        productList.clear()
+        productList.addAll(newList)
+        notifyDataSetChanged()
+    }
 }

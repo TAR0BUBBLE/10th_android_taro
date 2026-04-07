@@ -3,7 +3,9 @@ package com.example.week03_taro
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.week03_taro.databinding.ActivityMainBinding
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,6 +15,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        lifecycleScope.launch {
+            ProductDataStore.seedIfEmpty(applicationContext)
+        }
 
         initBottomNavigation()
 
@@ -48,6 +54,7 @@ class MainActivity : AppCompatActivity() {
                     changeFragment(ProfileFragment())
                     true
                 }
+
                 else -> false
             }
         }

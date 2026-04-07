@@ -6,34 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.week03_taro.databinding.FragmentWishlistBinding
+import kotlinx.coroutines.launch
 
 class WishlistFragment : Fragment() {
 
     private var _binding: FragmentWishlistBinding? = null
     private val binding get() = _binding!!
 
-    private val wishlistProductList = listOf(
-        Product(
-            imageResId = R.drawable.img_product_mid,
-            title = "Air Jordan 1 Mid",
-            price = "US$125",
-            description = "Inspired by the original AJ1, this mid-top edition maintains the iconic look you love.",
-            shownColor = "White",
-            styleCode = "DQ8426-100"
-        ),
-        Product(
-            imageResId = R.drawable.img_product_socks,
-            title = "Nike Everyday Plus Cushioned",
-            subtitle = "Training Ankle Socks (6 Pairs)",
-            colorCount = "5 Colours",
-            price = "US$10",
-            description = "The Nike Everyday Plus Cushioned Socks bring comfort to your workout with extra cushioning under the heel and forefoot and a snug, supportive arch band.",
-            shownColor = "Multi-Color",
-            styleCode = "SX6897-965"
-        )
-    )
+    private lateinit var wishlistAdapter: WishlistProductAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,12 +32,22 @@ class WishlistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        wishlistAdapter = WishlistProductAdapter { product ->
+            moveToDetail(product)
+        }
+
         binding.rvWishlistProducts.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = WishlistProductAdapter(wishlistProductList) { product ->
-                moveToDetail(product)
-            }
+            adapter = wishlistAdapter
             setHasFixedSize(true)
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                ProductDataStore.getWishlistProducts(requireContext()).collect { products ->
+                    wishlistAdapter.submitList(products)
+                }
+            }
         }
     }
 
@@ -62,8 +57,6 @@ class WishlistFragment : Fragment() {
             putExtra("title", product.title)
             putExtra("subtitle", product.subtitle)
             putExtra("price", product.price)
-            putExtra("colorCount", product.colorCount)
-            putExtra("badge", product.badge)
             putExtra("description", product.description)
             putExtra("shownColor", product.shownColor)
             putExtra("styleCode", product.styleCode)

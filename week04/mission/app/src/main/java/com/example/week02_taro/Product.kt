@@ -1,6 +1,7 @@
 package com.example.week03_taro
 
 data class Product(
+    val id: String,
     val imageResId: Int,
     val title: String,
     val subtitle: String = "",
@@ -10,5 +11,7 @@ data class Product(
     val description: String = "",
     val shownColor: String = "",
     val styleCode: String = "",
-    var isFavorite: Boolean = false
+    val isFavorite: Boolean = false,
+    val isShownInHome: Boolean = false,
+    val isShownInShop: Boolean = false
 )
