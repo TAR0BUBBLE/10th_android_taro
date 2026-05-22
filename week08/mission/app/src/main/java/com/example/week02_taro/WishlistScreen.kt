@@ -1,8 +1,12 @@
 package com.example.week03_taro
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -16,43 +20,60 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun WishlistScreen(
-    innerPadding: PaddingValues
-) {
+fun WishlistScreen() {
     val context = LocalContext.current
+    val productRows = wishlistProductList.chunked(2)
 
     LazyColumn(
         modifier = Modifier
-            .background(Color.White)
-            .padding(innerPadding),
+            .fillMaxWidth()
+            .background(Color.White),
         contentPadding = PaddingValues(
-            start = 24.dp,
-            end = 24.dp,
-            top = 32.dp,
-            bottom = 24.dp
-        ),
-        verticalArrangement = Arrangement.spacedBy(18.dp)
+            start = 14.dp,
+            end = 14.dp,
+            bottom = 12.dp
+        )
     ) {
         item {
+            Spacer(modifier = Modifier.height(78.dp))
+
             Text(
                 text = "위시리스트",
                 color = Color.Black,
                 fontSize = 28.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 10.dp, top = 16.dp, end = 10.dp, bottom = 16.dp)
             )
         }
 
         items(
-            items = wishlistProductList,
-            key = { product -> product.stableKey() }
-        ) { product ->
-            ProductListItem(
-                product = product,
-                showFavoriteIcon = true,
-                onClick = {
-                    context.openProductDetail(product)
+            items = productRows,
+            key = { row ->
+                row.joinToString(separator = "|") { product -> product.stableKey() }
+            }
+        ) { row ->
+            Row(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                row.forEach { product ->
+                    Box(
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        WishlistProductCard(
+                            product = product,
+                            onClick = {
+                                context.openProductDetail(product)
+                            }
+                        )
+                    }
                 }
-            )
+
+                if (row.size == 1) {
+                    Spacer(modifier = Modifier.weight(1f))
+                }
+            }
         }
     }
 }

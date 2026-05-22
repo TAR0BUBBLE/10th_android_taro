@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -24,15 +23,12 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun CartScreen(
-    innerPadding: PaddingValues,
     onMoveToShopClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(innerPadding)
-            .padding(horizontal = 24.dp, vertical = 40.dp)
             .clickable(onClick = onMoveToShopClick),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -63,15 +59,12 @@ fun CartScreen(
 }
 
 @Composable
-fun ProfileScreen(
-    innerPadding: PaddingValues
-) {
+fun ProfileScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(innerPadding)
-            .padding(horizontal = 24.dp, vertical = 40.dp)
+            .padding(horizontal = 24.dp, vertical = 78.dp)
     ) {
         Icon(
             imageVector = Icons.Outlined.PersonOutline,
