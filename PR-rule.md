@@ -35,6 +35,15 @@
 - 어떤 기능을 추가했는지, 어떤 수정을 했는지 한눈에 확인할 수 있도록 작성하면 좋아요.
 
 ```
-[커밋 이름](커밋 주소) : 설명 적기 ~~
-+ 이미지도 첨부해주시면 좋아요 ~
+[9주차 키워드 정리] (https://github.com/TAR0BUBBLE/10th_android_taro/commit/1822072) : 9주차 워크북 학습 내용인 API 연결, Retrofit, Repository, 마이페이지 구현과 관련된 핵심 키워드를 정리했습니다.
+
+[의존성 및 권한 추가] (https://github.com/TAR0BUBBLE/10th_android_taro/commit/9bb73ed) : ReqRes API 통신과 이미지 로딩을 위해 필요한 의존성과 인터넷 권한을 추가했습니다.
+
+[ReqRes 사용자 응답 모델 추가] (https://github.com/TAR0BUBBLE/10th_android_taro/commit/03fff3f) : ReqRes API에서 받아오는 사용자 응답 구조에 맞춰 response model을 추가했습니다.
+
+[ReqRes API 서비스 및 클라이언트 구현] (https://github.com/TAR0BUBBLE/10th_android_taro/commit/b9363f5) : ReqRes API와 통신하기 위한 Retrofit API Service와 클라이언트 설정을 구현했습니다.
+
+[ReqRes Repository 구현] (https://github.com/TAR0BUBBLE/10th_android_taro/commit/fa53697) : API 호출 로직을 화면에서 직접 처리하지 않도록 Repository를 구현하고, 사용자 정보를 가져오는 데이터 흐름을 분리했습니다.
+
+[피그마 디자인 기반 마이페이지 화면 구현] (https://github.com/TAR0BUBBLE/10th_android_taro/commit/656788d) : 마이페이지 화면을 구현하고, ReqRes에서 받아온 사용자 정보를 화면에 연결했습니다.
 ```
